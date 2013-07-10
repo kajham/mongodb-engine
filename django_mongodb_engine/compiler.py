@@ -14,7 +14,13 @@ from django.utils.tree import Node
 
 from pymongo.errors import PyMongoError
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId, InvalidId
+
+# handle pymongo backward compatibility
+try:
+	from bson.objectid import ObjectId
+	from bson.errors import InvalidId
+except ImportError:
+	from pymongo.objectid import ObjectId, InvalidId
 
 from djangotoolbox.db.basecompiler import NonrelQuery, NonrelCompiler, \
     NonrelInsertCompiler, NonrelUpdateCompiler, NonrelDeleteCompiler

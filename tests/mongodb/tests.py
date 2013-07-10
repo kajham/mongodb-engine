@@ -2,7 +2,10 @@ from django.db import connections
 from django.db.utils import DatabaseError
 from django.contrib.sites.models import Site
 
-from pymongo.objectid import InvalidId
+try:
+	from bson.errors import InvalidId
+except ImportError:
+	from pymongo.objectid import InvalidId
 from pymongo import ASCENDING, DESCENDING
 from gridfs import GridOut
 
